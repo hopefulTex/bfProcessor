@@ -2,6 +2,30 @@
 // Written in 2022 bc I keep forgetting that this project exists
 // Rose Thatcher copyright yadayada
 
+/*
++ 	0011, (if last- 0000)
+-		0100, (if last- 0000)
+>		0001, (if last- 1001)
+<		0010, (if last- 1001)
+[		0101
+]		0110, 1010
+.		0111 (Reads from memory, no need to load to register)
+,		1000, (if last- 0000)
+
+0x0 - 0000 - Load Register -> Memory
+0x1 - 0001 - Increment Memory Address
+0x2 - 0010 - Deincrement Memory Address
+0x3 - 0011 - Increment Value
+0x4 - 0100 - Deincrement Value
+0x5 - 0101 - Load PC -> Stack, Increment Stack Address
+0x6 - 0110 - Deincrement Stack Address (if !0)
+0x7 - 0111 - Load Memory -> Terminal
+0x8 - 1000 - Load Keyboard -> Register
+0x9 - 1001 - Load Memory -> Register
+0xa - 1010 - Load Stack -> PC (if !0), Increment Stack Address
+0xb - 1011 - HALT
+*/
+
 #include <iostream>
 #include <string>
 #include <fstream>
