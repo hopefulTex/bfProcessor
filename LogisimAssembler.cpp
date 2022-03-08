@@ -11,7 +11,7 @@
 ]		0110, 1010
 .		0111 (Reads from memory, no need to load to register)
 ,		1000, (if last- 0000)
-
+;   1011
 0x0 - 0000 - Load Register -> Memory
 0x1 - 0001 - Increment Memory Address
 0x2 - 0010 - Deincrement Memory Address
@@ -131,6 +131,10 @@ string parseFile(ifstream &inFile, int mode) {
             truncatedLine.push_back(line[i]);
             break;
 
+          case 0x3B:
+            // ;
+            truncatedLine.push_back(line[i]);
+
           case 0x3C:
             // <
             truncatedLine.push_back(line[i]);
@@ -208,6 +212,11 @@ string parseFile(ifstream &inFile, int mode) {
         finalLine += "7 "; //0111 Load Memory -> Terminal
         break;
 
+      case 0x3B:
+        // ;
+        finalLine += "b"; //1011 HALT
+        break;
+
       case 0x3C:
         // <
         finalLine += "2 "; //0010 Deincrement Memory Address
@@ -254,7 +263,7 @@ string parseFile(ifstream &inFile, int mode) {
       j++;
     }
   if(!(j % 8)) finalLine += '\n'; 
-  finalLine += "b "; //1011 HALT
+  finalLine += "b"; //1011 HALT
 
   if(openCount != closeCount) return errVec;
 
